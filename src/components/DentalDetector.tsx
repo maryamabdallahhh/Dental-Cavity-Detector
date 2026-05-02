@@ -332,8 +332,13 @@ export default function DentalDetector() {
   };
 
   //   Summary counts  
-
-  const counts = detections.reduce(
+interface DetectionCounts {
+  cavity: number;
+  filling: number;
+  impacted: number;
+  implant: number;
+}
+  const counts = detections.reduce<DetectionCounts>(
     (acc, d) => {
       const { meta } = getDetectionMeta(d);
       if (meta.key in acc) acc[meta.key as keyof typeof acc]++;
